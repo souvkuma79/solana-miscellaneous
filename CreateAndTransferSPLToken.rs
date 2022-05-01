@@ -14,7 +14,8 @@ use spl_token::{
 };
 
 //This routine creates the new wallet account and also transfer the mentioned number of lamports
-pub fn main()(spl_token_mint_token_b58: String, spl_token_mint_account_b58: String, cluster_url: String)  
+pub fn CreateAndTransferSPLToken(spl_token_mint_token_b58: String, spl_token_mint_account_b58: String, cluster_url: String)
+-> Result<String,, Box<dyn std::error::Error>> {
 																								-> Result<String, Box<dyn std::error::Error>> {   
 	//Read the Payer Keaypair & Pubkey
     let payer_keypair= read_keypair_file("./payer.json")?;
@@ -86,13 +87,13 @@ pub fn main()(spl_token_mint_token_b58: String, spl_token_mint_account_b58: Stri
 
     //Get balance & token account details
     let payer_account_balance = rpc.get_balance(&payer_pubkey).unwrap();
-    println!("=>Balance fetch from payer account is successfull, balance: {}", payer_account_balance);
+    println!("Balance fetch from payer account is successfull, balance: {}", payer_account_balance);
     //let spl_mint_acc_balance = rpc.get_balance(&spl_token_mint_token_pubkey).unwrap();
     let spl_mint_acc_balance = rpc.get_token_account_balance(&spl_token_mint_account_pubkey).unwrap();
-    println!("=>Balance fetch from SPL mint account is successfull, balance: {:?}", spl_mint_acc_balance);
+    println!("Balance fetch from SPL mint account is successfull, balance: {:?}", spl_mint_acc_balance);
     //let new_account_balance = rpc.get_balance(&new_account.pubkey()).unwrap();
     let new_account_balance = rpc.get_token_account_balance(&wallet_pubkey).unwrap();
-    println!("=>Balance fetch from newly created token associated account is successfull, balance: {:?}", new_account_balance);
+    println!("Balance fetch from newly created token associated account is successfull, balance: {:?}", new_account_balance);
 
     Ok(wallet_pubkey.to_string())
 }
