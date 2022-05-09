@@ -15,7 +15,7 @@ use spl_token::{
 
 //This routine creates the new wallet account and also transfer the mentioned number of lamports
 pub fn CreateAndTransferSPLToken(spl_token_mint_token_b58: String, spl_token_mint_account_b58: String, cluster_url: String)
--> Result<String,, Box<dyn std::error::Error>> {
+-> Result<String, Box<dyn std::error::Error>> {
 																								-> Result<String, Box<dyn std::error::Error>> {   
 	//Read the Payer Keaypair & Pubkey
     let payer_keypair= read_keypair_file("./payer.json")?;
